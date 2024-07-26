@@ -188,7 +188,6 @@ function maybeFixRenderSize() {
   // Re-create the effect composer.
   if (CONFIG.THREE_SETTINGS.BLOOM_ENABLED) {
     qut.log("TV3D: setting up post-processing.");
-    console.log(RenderPass)
     const renderPass = new RenderPass(scene, camera);
     const bloomPass = new UnrealBloomPass(
       new Vector2(size.width, size.height),

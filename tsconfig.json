@@ -24,7 +24,7 @@
     "noFallthroughCasesInSwitch": true,
     // Emit types
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationDir": "qx82",
     "emitDeclarationOnly": true,
   },
   "include": [

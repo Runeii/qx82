@@ -5,6 +5,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: [
+        path.resolve(__dirname, 'src/index.ts'),
         path.resolve(__dirname, 'src/qx.ts'),
         path.resolve(__dirname, 'src/qxa.ts'),
         path.resolve(__dirname, 'src/qut.ts'),
@@ -13,6 +14,7 @@ export default defineConfig({
       formats: ['es'],
       fileName: (format, entryName) => `${entryName}.js`
     },
+    outDir: 'qx82',
     rollupOptions: {
       external: [
         'three',

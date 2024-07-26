@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "main": "qx82/index.js",
+  "module": "qx82/index.js",
+  "types": "qx82/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && tsc",
