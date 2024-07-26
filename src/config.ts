@@ -1,4 +1,4 @@
-const DEFAULT_CONFIG: Config = {
+export const DEFAULT_CONFIG: Config = {
   // Enable debug?
   DEBUG: true,
   // Use 3D effect for the screen?
