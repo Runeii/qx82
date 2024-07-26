@@ -116,7 +116,7 @@ export class TextRenderer {
   async initAsync() {
     qut.log("TextRenderer init.");
 
-    const defaultFont = new TextRendererFont("default", chrFile);
+    const defaultFont = new TextRendererFont("default", CONFIG.CHR_FILE ?? chrFile);
     await defaultFont.initAsync();
 
     const actualCharWidth = defaultFont.getCharWidth();

@@ -33,7 +33,7 @@ type Config = {
     CONTAINER: string | HTMLElement | null;
   };
   BG_COLOR: string;
-  CHR_FILE: string;
+  CHR_FILE?: string;
   CHR_WIDTH: number;
   CHR_HEIGHT: number;
   SCREEN_ROWS: number;
