@@ -1,3 +1,4 @@
+/// <reference types="./types/global.d.ts" />
 import { DEFAULT_CONFIG } from './config';
 import * as qx from './qx';
 import * as qxa from './qxa';

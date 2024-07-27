@@ -8,7 +8,7 @@
   "types": "qx82/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && tsc && cp types/global.d.ts qx82/",
+    "build": "tsc && vite build && tsc && mkdir qx82/types && cp src/types/global.d.ts qx82/types/",
     "preview": "vite preview"
   },
   "devDependencies": {
