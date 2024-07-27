@@ -24,11 +24,20 @@
     "noFallthroughCasesInSwitch": true,
     // Emit types
     "declaration": true,
-    "declarationDir": "qx82",
+    "declarationDir": "./qx82",
+    "outDir": "./qx82",
+    "rootDir": "./src",
     "emitDeclarationOnly": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "types/*",
+        "src/*"
+      ]
+    }
   },
   "include": [
     "src",
-    "src/**/*.ts",
+    "types/global.d.ts",
   ]
 }
