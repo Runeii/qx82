@@ -54,25 +54,28 @@ export function setup(canvasToRenderTo: HTMLCanvasElement, canvasWithScreenConte
   qut.log("TV3D: setting up...");
   realCanvas = canvasToRenderTo;
   screenCanvas = canvasWithScreenContents;
-  renderer = new WebGLRenderer({ canvas: realCanvas, antialias: true });
+  renderer = new WebGLRenderer({ canvas: realCanvas, antialias: true, alpha: true, premultipliedAlpha: false });
   if (!renderer) {
     throw new Error("QX82: Could not create WebGL renderer.");
   }
   updateRendererSize();
-  renderer.setClearColor(new Color(CONFIG.BG_COLOR || "#000"));
   lastCanvasSize.set(0, 0);
   const size = getDesiredCanvasSize();
   camera = new PerspectiveCamera(CAMERA_FOV, size.width / size.height, CAMERA_NEAR, CAMERA_FAR);
   camera.position.z = CAMERA_Z;
   scene = new Scene();
-  scene.background = new Color(CONFIG.BG_COLOR || "#000");
+
+  renderer.setClearColor(new Color("blue"), 0);
+  scene.background = null
 
   texCanvas = document.createElement("canvas");
   texCanvas.width = screenCanvas.width * SCREEN_TEX_UPSCALE;
   texCanvas.height = screenCanvas.height * SCREEN_TEX_UPSCALE;
   texCanvas.style.width = (screenCanvas.width * SCREEN_TEX_UPSCALE) + "px";
   texCanvas.style.height = (screenCanvas.height * SCREEN_TEX_UPSCALE) + "px";
+  texCanvas.style.backgroundColor = 'blue'
   texCtx = texCanvas.getContext("2d");
+
   if (!texCtx) {
     throw new Error("QX82: Could not get 2D context for texture canvas.");
   }
@@ -91,13 +94,17 @@ export function setup(canvasToRenderTo: HTMLCanvasElement, canvasWithScreenConte
       time: { value: Date.now() - initTime },
     },
     vertexShader: VERTEX_SHADER,
-    fragmentShader: ASHIMA_WEBGL_NOISE + FRAGMENT_SHADER
+    fragmentShader: ASHIMA_WEBGL_NOISE + FRAGMENT_SHADER,
   });
   screenMesh = new Mesh(geom, screenMat);
   scene.add(screenMesh);
 
   maybeFixRenderSize();
   requestAnimationFrame(doFrame);
+  console.log('Renderer clear color:', renderer.getClearColor(new Color()));
+  console.log('Renderer clear alpha:', renderer.getClearAlpha());
+  console.log('Scene background:', scene.background);
+
   qut.log("TV3D: setup done");
 }
 
@@ -188,7 +195,7 @@ function maybeFixRenderSize() {
   // Re-create the effect composer.
   if (CONFIG.THREE_SETTINGS.BLOOM_ENABLED) {
     qut.log("TV3D: setting up post-processing.");
-    const renderPass = new RenderPass(scene, camera);
+    const renderPass = new RenderPass(scene, camera, null, null, 0);
     const bloomPass = new UnrealBloomPass(
       new Vector2(size.width, size.height),
       CONFIG.THREE_SETTINGS.BLOOM_STRENGTH,
